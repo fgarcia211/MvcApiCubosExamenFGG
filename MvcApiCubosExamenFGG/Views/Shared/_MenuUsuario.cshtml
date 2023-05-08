@@ -1,0 +1,34 @@
+﻿@if (Context.User.Identity.IsAuthenticated){
+    <li class="nav-item">
+        <a class="nav-link text-danger"
+       asp-controller="Usuarios"
+       asp-action="Perfil">
+            Perfil <span style="color:blue">@Context.User.FindFirst("NOMBRE").Value</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark"
+       asp-controller="Compras"
+       asp-action="ComprasUsuario">
+            Mis Compras
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-danger"
+       asp-controller="Auth"
+       asp-action="Logout">
+            Log Out
+        </a>
+    </li>
+}else{
+    <li class="nav-item">
+        <a class="nav-link text-danger"
+            asp-controller="Usuarios"
+            asp-action="Perfil">
+            Log In
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Usuarios" asp-action="CrearUsuario">Crear Usuario</a>
+    </li>
+}

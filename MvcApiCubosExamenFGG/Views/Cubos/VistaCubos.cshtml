@@ -1,0 +1,66 @@
+﻿@model IEnumerable<ApiCubosExamenFGG.Models.Cubo>
+
+@{
+    ViewData["Title"] = "VistaCubos";
+}
+
+<h1>VistaCubos</h1>
+
+<form method="post">
+    <label>Filtrar por marca: </label>
+    <input type="text" name="marca" class="form-control" />
+    <button class="btn btn-dark">Buscar</button>
+    <a asp-action="VistaCubos" class="btn btn-danger">Ver todos</a>
+</form>
+
+<p>
+    <a asp-action="CreateCubo">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdCubo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Marca)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Imagen)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Precio)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdCubo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Marca)
+            </td>
+            <td>
+                <img width="150" height="150" src="@item.Imagen">
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precio)
+            </td>
+            @if (Context.User.Identity.IsAuthenticated)
+            {
+                <td><a asp-action="ComprarCubo" asp-route-idcubo="@item.IdCubo" asp-controller="Compras" class="btn btn-dark">Comprar</a></td>    
+            } 
+        </tr>
+}
+    </tbody>
+</table>
